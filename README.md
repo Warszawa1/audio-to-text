@@ -1,6 +1,20 @@
 # Audio to Text 👂 -> 📝
 <br>
-![Screenshot 2024-06-24 at 17 37 22](https://github.com/Warszawa1/audio-to-text/assets/48474962/6f859fed-962e-4781-b323-4c7693b045aa)
+
+
+
+
+
+
+![Screenshot 2024-06-24 at 17 37 22](https://github.com/Warszawa1/audio-to-text/assets/48474962/3f361570-afef-46de-8061-8afc98edef7c)
+
+
+
+
+
+
+
+
 
 
 
@@ -48,11 +62,7 @@ cd audio-to-text`
 -Run the script:
 - `flask run` or `app.py`
 
-
-
-
-
-
+<br>
 
 
 ![Screenshot 2024-06-21 at 19 51 31](https://github.com/Warszawa1/audio-to-text/assets/48474962/f4f6b07e-7e54-4513-bd10-bb72f3c7ae1a)
