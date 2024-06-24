@@ -65,7 +65,7 @@ cd audio-to-text`
 <br>
 <br>
 
-###How it started:
+### How it started:
 
 
 ![Screenshot 2024-06-21 at 19 51 31](https://github.com/Warszawa1/audio-to-text/assets/48474962/f4f6b07e-7e54-4513-bd10-bb72f3c7ae1a)
