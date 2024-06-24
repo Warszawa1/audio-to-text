@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap");
+
+:root {
+  --background: #e0e5ec;
+  --gray: #797d7f;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+.container {
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.main {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--background);
+  border-radius: 12px;
+  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  width: 100%;
+  margin-top:1.2rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#playback-section {
+  background-color: #F5F5F5;
+  border-radius: 25px;
+  padding: 0;
+  box-shadow: none;
+}
+
+.btn-neumorphic {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  justify-content: center;
+  color: var(--gray);
+  box-shadow: -4px -4px 8px 0px #ffffff, 4px 4px 8px 0px #c1c4c8;
+  transition: all 0.3s ease-in-out;
+  margin: 0.5rem 0;
+}
+
+.btn-neumorphic:active {
+  box-shadow: inset -8px -8px 20px #fff9, inset -5px -5px 6px #fff9,
+  inset 8px 8px 20px #0003, inset 5px 5px 6px #0001;
+}
+
+.btn-neumorphic:disabled {
+  background-color: #c1c4c8;
+  inset 8px 8px 20px #0003, inset 5px 5px 6px #0001;
+}
+
+
+
+.select-neumorphic {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 12px;
+  border: none;
+  box-shadow: inset 6px 6px 12px #c1c4c8, inset -6px -6px 12px #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.9rem;
+  background-color: var(--background);
+  color: var(--gray);
+}
+
+#transcriptions {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--background);
+  /*box-shadow: inset 8px 8px 16px #c1c4c8, inset -8px -8px 16px #ffffff;*/
+}
+
+
+#transcriptions p {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: #f0f0f3;
+  border-radius: 12px;
+  /*box-shadow: 4px 4px 8px #c1c4c8, -4px -4px 8px #ffffff;*/
+}
+
+

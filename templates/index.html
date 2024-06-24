@@ -3,117 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Record and Transcribe Audio</title>
+    <title>Speech-to-Text</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
 </head>
 <body>
-    <h1>Record and Transcribe Audio</h1>
-    <button id="start-recording">Start Recording</button>
-    <button id="stop-recording" disabled>Stop Recording</button>
-    <audio id="audio-player" controls></audio>
-    <button id="recognize-audio" disabled>Recognize Audio</button>
-    <button id="toggle-transcriptions">Show Previous Transcriptions</button>
-    <div id="transcriptions" style="display: none;"></div>
-
-    <script>
-        const startButton = document.getElementById('start-recording');
-        const stopButton = document.getElementById('stop-recording');
-        const recognizeButton = document.getElementById('recognize-audio');
-        const toggleTranscriptionsButton = document.getElementById('toggle-transcriptions');
-        const audioPlayer = document.getElementById('audio-player');
-        const transcriptionsDiv = document.getElementById('transcriptions');
-
-        let mediaRecorder;
-        let audioChunks = [];
-        let audioFilename;
-        let transcriptions = [];
-
-        startButton.addEventListener('click', () => {
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                    mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
-                    mediaRecorder.start();
-
-                    mediaRecorder.ondataavailable = event => {
-                        audioChunks.push(event.data);
-                    };
-
-                    mediaRecorder.onstop = () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                        const reader = new FileReader();
-                        reader.readAsDataURL(audioBlob);
-                        reader.onloadend = () => {
-                            const base64AudioMessage = reader.result;
-
-                            fetch('/upload', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded',
-                                },
-                                body: `audio_data=${encodeURIComponent(base64AudioMessage)}`,
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                audioFilename = data.filename;
-                                audioPlayer.src = `/uploads/${audioFilename}`;
-                                audioPlayer.load();
-                                recognizeButton.disabled = false;
-                                audioChunks = []; // Clear audioChunks after upload
-                            })
-                            .catch(error => {
-                                console.error('Error uploading audio:', error);
-                            });
-                        };
-                    };
-
-                    startButton.disabled = true;
-                    stopButton.disabled = false;
-                })
-                .catch(error => {
-                    console.error('Error accessing microphone:', error);
-                });
-        });
-
-        stopButton.addEventListener('click', () => {
-            if (mediaRecorder && mediaRecorder.state === "recording") {
-                mediaRecorder.stop();
-            }
-            startButton.disabled = false;
-            stopButton.disabled = true;
-        });
-
-        recognizeButton.addEventListener('click', () => {
-            fetch(`/recognize/${audioFilename}`, {
-                method: 'POST',
-            })
-            .then(response => response.json())
-            .then(data => {
-                const transcription = document.createElement('p');
-                if (data.transcription) {
-                    transcription.innerText = `Transcription: ${data.transcription}`;
-                    transcriptions.push(data.transcription);
-                } else if (data.error) {
-                    transcription.innerText = `Error: ${data.error}`;
-                }
-                transcriptionsDiv.appendChild(transcription);
-                transcriptionsDiv.style.display = 'block';  // Show the transcriptions div
-            })
-            .catch(error => {
-                console.error('Error recognizing audio:', error);
-            });
-        });
-
-        toggleTranscriptionsButton.addEventListener('click', () => {
-            if (transcriptionsDiv.style.display === 'none') {
-                transcriptionsDiv.style.display = 'block';
-                toggleTranscriptionsButton.innerText = 'Hide Previous Transcriptions';
-            } else {
-                transcriptionsDiv.style.display = 'none';
-                toggleTranscriptionsButton.innerText = 'Show Previous Transcriptions';
-            }
-        });
-    </script>
+    <div class="container">
+        <header class="header">
+            <h2>🗣️ Speech-to-Text 📝 Converter</h2>
+        </header>
+        <main class="main">
+            <section id="recording-section" class="section">
+                <button id="start-recording" class="btn-neumorphic">Start Recording</button>
+                <button id="stop-recording" class="btn-neumorphic" disabled>Stop Recording</button>
+            </section>
+            <section id="playback-section" class="section">
+                <audio id="audio-player" controls></audio>
+            </section>
+            <section id="language-selection" class="section">
+                <label for="language-select">Select Language:</label>
+                <select id="language-select" class="select-neumorphic">
+                    <option value="en-US">English</option>
+                    <option value="es-ES">Spanish</option>
+                    <option value="fr-FR">French</option>
+                    <!-- Add more options as needed -->
+                </select>
+                <button id="recognize-audio" class="btn-neumorphic" disabled>Recognize Audio</button>
+            </section>
+            <section id="transcriptions-section" class="section">
+                <button id="toggle-transcriptions" class="btn-neumorphic">Show Previous Transcriptions</button>
+                <div id="transcriptions" style="display: none;"></div>
+            </section>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+
+
 
 
 
